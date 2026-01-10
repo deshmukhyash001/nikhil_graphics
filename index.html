@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikhil Graphics & Advertising</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+:root{
+  --pink:#ff006e;
+  --blue:#3a86ff;
+  --green:#80ed99;
+  --yellow:#ffbe0b;
+  --purple:#8338ec;
+}
+
+body{
+  background:radial-gradient(circle at top,#111,#050505);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* LOADER */
+.loader{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.loader h1{
+  font-size:60px;
+  letter-spacing:8px;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:25px 6%;
+  display:flex;
+  justify-content:space-between;
+  z-index:100;
+}
+nav span{font-weight:800}
+
+/* SECTIONS */
+section{
+  min-height:100vh;
+  padding:10vh 8%;
+}
+
+/* HERO */
+.hero h1{
+  font-size:12vw;
+  font-weight:900;
+  line-height:0.9;
+}
+.hero .accent{
+  background:linear-gradient(90deg,var(--yellow),var(--pink),var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* MARQUEE */
+.marquee{
+  white-space:nowrap;
+  font-size:22px;
+  opacity:.6;
+  overflow:hidden;
+}
+.marquee span{
+  display:inline-block;
+  padding-right:60px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+  color: white;
+}
+.card{
+  background:linear-gradient(145deg,#111,#1a1a1a);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:40px;
+  border-radius:30px;
+  min-height:220px;
+  transition:.4s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 60px rgba(255,190,11,.2);
+}
+
+
+/* BIG TEXT */
+.big-text{
+  font-size:8vw;
+  font-weight:900;
+  line-height:1;
+}
+
+/* FOOTER */
+footer{
+  padding:80px 8%;
+  border-top:1px solid #222;
+}
+
+/* IMAGE BLOCKS */
+.image-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
+  margin-top:80px;
+}
+.image-box{
+  height:420px;
+  border-radius:30px;
+  overflow:hidden;
+}
+.image-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* SPLIT SECTION */
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+@media(max-width:900px){
+  .split{grid-template-columns:1fr}
+}
+
+/* PROCESS */
+.process{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+.step{
+  padding:40px;
+  border:1px solid #222;
+  border-radius:30px;
+  min-height:240px;
+}
+
+/* WORK */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:40px;
+}
+.work{
+  height:360px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+}
+.work img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.work span{
+  position:absolute;
+  bottom:25px;
+  left:25px;
+  font-weight:800;
+}
+
+/* SPACER */
+.spacer{height:40vh}
+
+
+/* Floating cards */
+
+/* FLOATING CARDS */
+.floating-cards{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.float-card{
+  position:absolute;
+  padding:20px 30px;
+  border-radius:20px;
+  font-weight:800;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.08);
+  box-shadow:
+    0 0 30px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(255,255,255,0.15);
+}
+
+/* Grass glow */
+.float-card::after{
+  content:"";
+  position:absolute;
+  bottom:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120%;
+  height:60px;
+  filter:blur(25px);
+  z-index:-1;
+}
+
+.green{top:35%;left:10%;}
+.green::after{background:var(--green);}
+
+.blue{top:55%;right:12%;}
+.blue::after{background:var(--blue);}
+
+.pink{top:70%;left:35%;}
+.pink::after{background:var(--pink);}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- FLoating glass efect -->
+
+<div class="floating-cards">
+  <div class="float-card green">SIGNAGE</div>
+  <div class="float-card blue">DIGITAL ADS</div>
+  <div class="float-card pink">BRANDING</div>
+</div>
+
+
+<!-- LOADER -->
+<div class="loader">
+  <h1>LOADING</h1>
+</div>
+
+<nav>
+  <span>NIKHIL GRAPHICS</span>
+  <span>CONTACT</span>
+</nav>
+
+<!-- HERO -->
+<!-- HERO -->
+<section class="hero">
+  <h1>
+    CREATIVE<br>
+    BRANDING<br>
+    <span class="accent">SIGNAGE</span>
+  </h1>
+</section>
+
+<!-- MARQUEE -->
+<section>
+  <div class="marquee">
+    <span>GRAPHICS • ADVERTISING • DIGITAL • CCTV •</span>
+    <span>GRAPHICS • ADVERTISING • DIGITAL • CCTV •</span>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section>
+  <div class="big-text">WE CREATE<br>VISIBILITY</div>
+  <p style="max-width:700px;margin-top:30px">
+    Since 2020, Nikhil Graphics & Advertising has helped businesses
+    dominate attention in physical and digital spaces.
+    From large-scale hoardings to daily digital creatives,
+    we design visibility that converts.
+  </p>
+
+  <div class="image-row">
+    <div class="image-box">
+      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36">
+    </div>
+    <div class="image-box">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT STORY -->
+<section class="split">
+  <div>
+    <div class="big-text">OFFLINE<br>TO ONLINE</div>
+    <p style="margin-top:20px">
+      We connect physical branding with digital growth.
+      Your boards, signage and ads work together with
+      Instagram, reels and paid campaigns.
+    </p>
+  </div>
+  <div class="image-box">
+    <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <div class="big-text">SERVICES</div>
+  <div class="cards">
+    <div class="card">Advertising & Signage Solutions</div>
+    <div class="card">Daily Graphic Designing</div>
+    <div class="card">Instagram Account Handling</div>
+    <div class="card">Reels Shooting & Editing</div>
+    <div class="card">Meta Ads Campaigns</div>
+    <div class="card">CCTV Installation & Maintenance</div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="big-text">OUR<br>PROCESS</div>
+  <div class="process">
+    <div class="step">01 — Understanding Your Business</div>
+    <div class="step">02 — Creative & Strategy Planning</div>
+    <div class="step">03 — Design, Production & Installation</div>
+    <div class="step">04 — Digital Growth & Optimization</div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section>
+  <div class="big-text">WORK</div>
+  <div class="work-grid">
+    <div class="work">
+      <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e">
+      <span>Hoarding Design</span>
+    </div>
+    <div class="work">
+      <img src="https://images.unsplash.com/photo-1529336953121-ad8a1a0c4f4b">
+      <span>Shop Branding</span>
+    </div>
+    <div class="work">
+      <img src="https://images.unsplash.com/photo-1557683316-973673baf926">
+      <span>Digital Campaign</span>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section>
+  <div class="big-text">1000+<br>BOARDS<br>INSTALLED</div>
+</section>
+
+<div class="spacer"></div>
+
+<!-- CONTACT -->
+<footer>
+  <div class="big-text">LET’S<br>BUILD<br>YOUR BRAND</div>
+  <p>📞 7821073698</p>
+  <p>📷 @nikhil_patilofficial01</p>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* LOADER */
+gsap.to(".loader",{
+  yPercent:-100,
+  delay:1.2,
+  duration:1,
+  ease:"power4.inOut"
+});
+
+/* HERO TEXT */
+gsap.from(".hero h1",{
+  y:200,
+  opacity:0,
+  duration:1.2,
+  delay:1.5
+});
+
+/* MARQUEE */
+gsap.to(".marquee span",{
+  xPercent:-50,
+  repeat:-1,
+  ease:"linear",
+  duration:20
+});
+
+/* SCROLL ANIMATIONS */
+gsap.utils.toArray("section").forEach(sec=>{
+  gsap.from(sec,{
+    opacity:0,
+    y:100,
+    scrollTrigger:{
+      trigger:sec,
+      start:"top 80%",
+      end:"top 30%",
+      scrub:1
+    }
+  })
+});
+
+/* CARDS */
+gsap.from(".card",{
+  y:120,
+  opacity:0,
+  stagger:0.15,
+  scrollTrigger:{
+    trigger:".cards",
+    start:"top 80%"
+  }
+
+  
+});
+
+/* IMAGES */
+gsap.from(".image-box img",{
+  scale:1.2,
+  opacity:0,
+  stagger:0.2,
+  scrollTrigger:{
+    trigger:".image-row",
+    start:"top 80%"
+  }
+});
+
+/* SPLIT */
+gsap.from(".split > *",{
+  y:120,
+  opacity:0,
+  stagger:0.2,
+  scrollTrigger:{
+    trigger:".split",
+    start:"top 75%"
+  }
+});
+
+/* WORK */
+gsap.from(".work",{
+  y:150,
+  opacity:0,
+  stagger:0.2,
+  scrollTrigger:{
+    trigger:".work-grid",
+    start:"top 80%"
+  }
+});
+
+gsap.to(".float-card",{
+  y:30,
+  duration:4,
+  repeat:-1,
+  yoyo:true,
+  ease:"sine.inOut",
+  stagger:1
+});
+
+gsap.utils.toArray(".big-text").forEach(txt=>{
+  gsap.from(txt,{
+    textShadow:"0 0 0px transparent",
+    scrollTrigger:{
+      trigger:txt,
+      start:"top 80%",
+      onEnter:()=>txt.style.textShadow="0 0 60px rgba(255,183,3,.25)"
+    }
+  });
+});
+
+
+</script>
+
+</body>
+</html>
